@@ -42,12 +42,14 @@ const EditCategoryContainer: FC<EditCategoryProps> = ({
   const match = useRouteMatch<any>();
   const { categoryId } = match.params;
   const onSubmit = (data: EditCategory) => {
-    if (isPhotoLoad && last_photo)
-      fetchUpdateCategory(
-        categoryId,
-        { name: data.name, image: last_photo },
-        history
-      );
+    fetchUpdateCategory(
+      categoryId,
+      {
+        name: data.name,
+        image: isPhotoLoad && last_photo ? last_photo : singleCategory.image,
+      },
+      history
+    );
   };
 
   const handleImageAsFile = async (e: any) => {

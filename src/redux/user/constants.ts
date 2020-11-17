@@ -1,0 +1,6 @@
+export const FETCH_AUTH_USER = "user/FETCH_AUTH_USER";
+export const REQUEST_AUTH_USER = "user/REQUEST_AUTH_USER";
+export const REQUEST_AUTH_USER_ERROR = "user/REQUEST_AUTH_USER_ERROR";
+export const REQUEST_AUTH_USER_SUCCESS = "user/REQUEST_AUTH_USER_SUCCESS";
+
+export const USER_LOGOUT = "user/USER_LOGOUT";

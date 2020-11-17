@@ -1,0 +1,97 @@
+.Menu {
+  position: fixed;
+  width: 140px;
+  padding: 0 10px;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  .Menu-List {
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .Menu-List-Image {
+      width: 60px;
+      height: 60px;
+      margin: 10px;
+    }
+    .Menu-List-Item {
+      display: flex;
+      padding: 10px 10px;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      .Menu-List-Item-Link {
+        font-size: 16px;
+        font-family: Roboto;
+        font-weight: 600;
+        text-decoration: none;
+        color: #c700cb;
+        &:active {
+          color: #c700cb;
+        }
+      }
+      &:hover {
+        background-color: #e4e4e4;
+      }
+    }
+    .Menu-List-Selected {
+      background-color: #e4e4e4;
+    }
+    .Menu-List-Underline {
+      width: 100%;
+      height: 2px;
+      background-color: #e4e4e4;
+    }
+    .Menu-List-Logout {
+      margin-top: 20px;
+      margin-right: 5px;
+      .Menu-List-Logout-Icon {
+        font-size: 30px;
+        color: #c700cb;
+      }
+    }
+  }
+}
+
+.Burger {
+  display: flex;
+  flex: 1;
+  @media (min-width: 769px) {
+    display: none;
+  }
+  .Burger-Container {
+    position: fixed;
+    top: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: #e4e4e4 1px solid;
+
+    .Burger-Container-Image {
+      height: 50px;
+    }
+
+    .Burger-Container-Button {
+      display: flex;
+      min-width: 40px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .Burger-Container-Logo {
+      margin-left: 40px;
+    }
+  }
+}

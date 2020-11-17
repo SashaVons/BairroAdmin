@@ -1,0 +1,16 @@
+.Cabinet {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  .Cabinter-Content {
+    flex: 1;
+    margin-left: 140px;
+    @media (max-width: 768px) {
+      margin-top: 60px;
+      margin-left: 0;
+    }
+  }
+}

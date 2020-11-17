@@ -1,0 +1,50 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  .Container-Input {
+    box-sizing: border-box;
+    margin: 0px;
+    font-variant: tabular-nums;
+    list-style: none;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: #595c97;
+    font-size: 14px;
+    line-height: 2;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #e4e9f0;
+    border-radius: 2px;
+    transition: all 0.3s;
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      border: 1px solid;
+      border-color: #595c97;
+    }
+  }
+  .Container-Input-Error {
+    border-color: #f5222e !important;
+  }
+  .Error {
+    opacity: 0;
+    display: flex;
+    min-height: 24px;
+    .Error-Text {
+      padding-top: 4px;
+      font-size: 12px;
+      font-family: Roboto;
+      color: #f5222e;
+    }
+  }
+  .Error-Trans {
+    opacity: 1;
+    transition: opacity ease-in 0.3s;
+  }
+}

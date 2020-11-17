@@ -1,0 +1,77 @@
+.Orders {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+  .Orders-Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: #e4e4e4 1px solid;
+    margin: 0px 50px;
+    margin-bottom: 10px;
+    @media (max-width: 768px) {
+      margin: 0px;
+    }
+    .Orders-Header-Title {
+      font-family: Roboto;
+      font-size: 44px;
+      font-weight: 800;
+      padding-bottom: 10px;
+    }
+    .Orders-Header-Button {
+      min-width: 40px;
+      .Orders-Header-Button-Icon {
+        font-size: 30px;
+      }
+    }
+  }
+  .Orders-Table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    .Orders-Table-Image {
+      height: 80px;
+    }
+    .Orders-Table-Edit {
+      font-size: 26px;
+      color: #c700cb;
+    }
+    .Orders-Table-Delete {
+      font-size: 26px;
+      color: #ff0000;
+    }
+    .Orders-Table-Title {
+      font-size: 16px;
+      font-family: Roboto;
+      font-weight: 500;
+    }
+    thead tr {
+      background-color: #c700cb;
+      color: #ffffff;
+      text-align: left;
+    }
+    tbody tr {
+      border-bottom: 1px solid #dddddd;
+      padding: 12px 15px;
+      user-select: none;
+      &:hover {
+        color: #c700cb;
+      }
+    }
+
+    tbody tr:last-of-type {
+      border-bottom: 2px solid #c700cb;
+    }
+    td,
+    th {
+      padding: 12px 15px;
+      align: start;
+    }
+  }
+}

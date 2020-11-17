@@ -1,0 +1,112 @@
+.Order-Item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+  .Order-Item-Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: #e4e4e4 1px solid;
+    margin: 0px 50px;
+    margin-bottom: 10px;
+    @media (max-width: 768px) {
+      margin: 0px;
+    }
+    .Order-Item-Header-Title {
+      font-family: Roboto;
+      font-size: 44px;
+      font-weight: 800;
+      padding-bottom: 10px;
+    }
+    .Order-Item-Header-Button {
+      min-width: 40px;
+      .Order-Item-Header-Button-Icon {
+        font-size: 30px;
+      }
+    }
+  }
+  .Order-Item-Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    width: 80%;
+    .Order-Item-Form-Title {
+      font-family: Roboto;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .Order-Item-Form-Main {
+      font-family: Roboto;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .Order-Item-Form-Text {
+      font-family: Roboto;
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+    .Order-Item-Form-Row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+      .Order-Item-Form-Row-Container {
+        width: 30%;
+      }
+    }
+    .Orders-Table {
+      border-collapse: collapse;
+      font-size: 0.9em;
+      font-family: sans-serif;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      .Orders-Table-Image {
+        height: 160px;
+      }
+      .Orders-Table-Edit {
+        font-size: 26px;
+        color: #c700cb;
+      }
+      .Orders-Table-Delete {
+        font-size: 26px;
+        color: #ff0000;
+      }
+      .Orders-Table-Title {
+        font-size: 16px;
+        font-family: Roboto;
+        font-weight: 500;
+      }
+      thead tr {
+        background-color: #c700cb;
+        color: #ffffff;
+        text-align: left;
+      }
+      tbody tr {
+        border-bottom: 1px solid #dddddd;
+        padding: 12px 15px;
+        user-select: none;
+      }
+
+      tbody tr:last-of-type {
+        border-bottom: 2px solid #c700cb;
+      }
+      td,
+      th {
+        padding: 12px 15px;
+        align: start;
+      }
+    }
+  }
+}

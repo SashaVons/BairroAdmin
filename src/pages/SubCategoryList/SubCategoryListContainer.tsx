@@ -56,6 +56,7 @@ const SubCategoryListContainer: FC<SubCategoryListProps> = ({
           <thead>
             <tr>
               <th>Name</th>
+              <th>Portugal Name</th>
               <th>Category</th>
               <th>Action</th>
             </tr>
@@ -67,6 +68,9 @@ const SubCategoryListContainer: FC<SubCategoryListProps> = ({
                     <tr>
                       <td className="Sub-Category-Table-Title" align="left">
                         {item.name}
+                      </td>
+                      <td className="Sub-Category-Table-Title" align="left">
+                        {item.name_pt}
                       </td>
                       <td className="Sub-Category-Table-Title" align="left">
                         {item.category

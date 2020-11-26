@@ -56,6 +56,7 @@ const CategoryListContainer: FC<CategoryListProps> = ({
             <tr>
               <th>Image</th>
               <th>Name</th>
+              <th>Portugal Name</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -72,6 +73,9 @@ const CategoryListContainer: FC<CategoryListProps> = ({
                       </td>
                       <td className="Category-Table-Title" align="left">
                         {item.name}
+                      </td>
+                      <td className="Category-Table-Title" align="left">
+                        {item.name_pt}
                       </td>
                       <td align="right">
                         {/* /edit/:categoryId */}

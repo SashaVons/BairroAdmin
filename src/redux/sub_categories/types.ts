@@ -121,6 +121,7 @@ export interface CreateSubCategory extends Action, FetchCreateSubCategory {
 
 export interface FetchCreateSubCategory {
   name: string;
+  name_pt: string;
   category: string;
   history: any;
 }
@@ -141,6 +142,7 @@ export interface FetchEditSubCategory {
   subCategoryId: string;
   updated_sub_category: {
     name: string;
+    name_pt: string;
     category: string;
   };
   history: any;

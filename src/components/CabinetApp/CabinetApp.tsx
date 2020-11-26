@@ -21,7 +21,11 @@ const CabinetAppMain: FC<CabinetAppMainProps> = ({ user }) => {
   return (
     <div className="App">
       <Switch>
-        <PrivateRoute path="/cabinet" component={Cabinet} authed={user} />
+        <PrivateRoute
+          path="/cabinet"
+          component={Cabinet}
+          authed={user && user.type}
+        />
         <Route exact path="/login" render={() => <LoginContainer />} />
         <Route path="*" render={() => <LoginContainer />} />
       </Switch>

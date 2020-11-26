@@ -21,6 +21,7 @@ import {
 
 type CreateCategory = {
   name: string;
+  name_pt: string;
   category: string;
 };
 
@@ -29,7 +30,7 @@ interface CreateSubCategoryProps {
   fetchSingleSubCategory: (subCategoryId: string) => void;
   fetchEditSubCategory: (
     subCategoryId: string,
-    updated_sub_category: { name: string; category: string },
+    updated_sub_category: { name: string; name_pt: string; category: string },
     history: any
   ) => void;
   singleSubCategory: any;
@@ -56,6 +57,7 @@ const EditSubCategoryContainer: FC<CreateSubCategoryProps> = ({
   useEffect(() => {
     if (singleSubCategory) {
       setValue("name", singleSubCategory.name);
+      setValue("name_pt", singleSubCategory.name_pt);
       setValue("category", singleSubCategory.category._id);
     }
   }, [singleSubCategory]);
@@ -79,6 +81,13 @@ const EditSubCategoryContainer: FC<CreateSubCategoryProps> = ({
           <FormInput
             placeholder={"Name"}
             name={"name"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
+          <FormInput
+            placeholder={"Portugal Name"}
+            name={"name_pt"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -115,7 +124,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(fetchSingleSubCategory(subCategoryId)),
   fetchEditSubCategory: (
     subCategoryId: string,
-    updated_sub_category: { name: string; category: string },
+    updated_sub_category: { name: string; name_pt: string; category: string },
     history: any
   ) =>
     dispatch(

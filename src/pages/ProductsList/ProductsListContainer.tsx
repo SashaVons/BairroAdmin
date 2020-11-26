@@ -53,8 +53,10 @@ const ProductsListContainer: FC<ProductsListProps> = ({
             <tr>
               <th>Image</th>
               <th>Title</th>
+              <th>Storage Count</th>
               <th>Category</th>
               <th>Sub Category</th>
+              <th>Storage Info</th>
               <th>Price</th>
               <th>Discount</th>
               <th>Action</th>
@@ -75,10 +77,16 @@ const ProductsListContainer: FC<ProductsListProps> = ({
                         {item.title}
                       </td>
                       <td className="Products-Table-Title" align="left">
+                        {item.storage_count}
+                      </td>
+                      <td className="Products-Table-Title" align="left">
                         {item.category.name}
                       </td>
                       <td className="Products-Table-Title" align="left">
                         {item.sub_category.name}
+                      </td>
+                      <td className="Products-Table-Title" align="left">
+                        {item.storage_info}
                       </td>
                       <td className="Products-Table-Title" align="left">
                         {`${item.price.current} €`}

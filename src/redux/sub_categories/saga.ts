@@ -122,6 +122,7 @@ function* fetchCreateSubCategory(data: FetchCreateSubCategory) {
     yield call(() =>
       firestore.collection("sub_category").add({
         name: data.name,
+        name_pt: data.name_pt,
         category: firestore.doc(`category/${data.category}`),
       })
     );
@@ -189,6 +190,7 @@ function* fetchEditSubCategory(data: FetchEditSubCategory) {
         .doc(data.subCategoryId)
         .update({
           name: data.updated_sub_category.name,
+          name_pt: data.updated_sub_category.name_pt,
           category: firestore.doc(
             `category/${data.updated_sub_category.category}`
           ),

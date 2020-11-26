@@ -61,11 +61,13 @@ export const requestDeleteSubCategorySuccess = () => ({
 
 export const fetchCreateSubCategory = (
   name: string,
+  name_pt: string,
   category: string,
   history: any
 ) => ({
   type: FETCH_CREATE_SUB_CATEGORY,
   name,
+  name_pt,
   category,
   history,
 });
@@ -86,6 +88,7 @@ export const fetchEditSubCategory = (
   subCategoryId: string,
   updated_sub_category: {
     name: string;
+    name_pt: string;
     category: string;
   },
   history: any

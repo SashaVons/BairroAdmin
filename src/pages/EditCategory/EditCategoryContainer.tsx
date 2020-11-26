@@ -15,6 +15,7 @@ import "./edit-category.scss";
 
 type EditCategory = {
   name: string;
+  name_pt: string;
 };
 
 interface EditCategoryProps {
@@ -23,7 +24,7 @@ interface EditCategoryProps {
   fetchSingleCategory: (categoryId: string) => void;
   fetchUpdateCategory: (
     categoryId: string,
-    updated_category: { name: string; image: string },
+    updated_category: { name: string; name_pt: string; image: string },
     history: any
   ) => void;
   last_photo: string | undefined;
@@ -46,6 +47,7 @@ const EditCategoryContainer: FC<EditCategoryProps> = ({
       categoryId,
       {
         name: data.name,
+        name_pt: data.name_pt,
         image: isPhotoLoad && last_photo ? last_photo : singleCategory.image,
       },
       history
@@ -64,7 +66,10 @@ const EditCategoryContainer: FC<EditCategoryProps> = ({
   }, []);
 
   useEffect(() => {
-    if (singleCategory) setValue("name", singleCategory.name);
+    if (singleCategory) {
+      setValue("name", singleCategory.name);
+      setValue("name_pt", singleCategory.name_pt);
+    }
   }, [singleCategory]);
 
   return (
@@ -95,6 +100,13 @@ const EditCategoryContainer: FC<EditCategoryProps> = ({
         <FormInput
           placeholder={"Name"}
           name={"name"}
+          errors={errors}
+          register={register}
+          required={{ required: true }}
+        />
+        <FormInput
+          placeholder={"Portugal Name"}
+          name={"name_pt"}
           errors={errors}
           register={register}
           required={{ required: true }}

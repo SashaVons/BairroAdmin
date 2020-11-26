@@ -16,6 +16,7 @@ import { fetchCreateSubCategory } from "../../redux/sub_categories/actions";
 
 type CreateCategory = {
   name: string;
+  name_pt: string;
   category: string;
 };
 
@@ -24,6 +25,7 @@ interface CreateSubCategoryProps {
   fetchAllCategories: () => void;
   fetchCreateSubCategory: (
     name: string,
+    name_pt: string,
     category: string,
     history: any
   ) => void;
@@ -39,7 +41,7 @@ const CreateSubCategoryContainer: FC<CreateSubCategoryProps> = ({
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data: CreateCategory) => {
-    fetchCreateSubCategory(data.name, data.category, history);
+    fetchCreateSubCategory(data.name, data.name_pt, data.category, history);
   };
 
   useEffect(() => {
@@ -60,6 +62,13 @@ const CreateSubCategoryContainer: FC<CreateSubCategoryProps> = ({
           <FormInput
             placeholder={"Name"}
             name={"name"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
+          <FormInput
+            placeholder={"Portugal Name"}
+            name={"name_pt"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -91,8 +100,12 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchAllCategories: () => dispatch(fetchAllCategories()),
-  fetchCreateSubCategory: (name: string, category: string, history: any) =>
-    dispatch(fetchCreateSubCategory(name, category, history)),
+  fetchCreateSubCategory: (
+    name: string,
+    name_pt: string,
+    category: string,
+    history: any
+  ) => dispatch(fetchCreateSubCategory(name, name_pt, category, history)),
 });
 
 export default connect(

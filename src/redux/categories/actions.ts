@@ -69,11 +69,13 @@ export const requestCreateCategorySuccess = () => ({
 
 export const fetchCreateCategory = (
   name: string,
+  name_pt: string,
   image: string,
   history: any
 ) => ({
   type: FETCH_CREATE_CATEGORY,
   name,
+  name_pt,
   image,
   history,
 });

@@ -11,11 +11,17 @@ import { useHistory } from "react-router-dom";
 
 type CreateCategory = {
   name: string;
+  name_pt: string;
 };
 
 interface CreateCategoryProps {
   fetchCreatePhoto: (image: any) => void;
-  fetchCreateCategory: (name: string, image: string, history: any) => void;
+  fetchCreateCategory: (
+    name: string,
+    name_pt: string,
+    image: string,
+    history: any
+  ) => void;
   last_photo: string | undefined;
 }
 
@@ -36,7 +42,7 @@ const CreateCategoryContainer: FC<CreateCategoryProps> = ({
   };
   const onSubmit = (data: CreateCategory) => {
     if (isPhotoLoad && last_photo)
-      fetchCreateCategory(data.name, last_photo, history);
+      fetchCreateCategory(data.name, data.name_pt, last_photo, history);
   };
 
   return (
@@ -69,6 +75,13 @@ const CreateCategoryContainer: FC<CreateCategoryProps> = ({
           register={register}
           required={{ required: true }}
         />
+        <FormInput
+          placeholder={"Protugal Name"}
+          name={"name_pt"}
+          errors={errors}
+          register={register}
+          required={{ required: true }}
+        />
         <input
           type="submit"
           className="Category-Create-Form-Button"
@@ -87,8 +100,12 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchCreatePhoto: (image: any) => dispatch(fetchCreatePhoto(image)),
-  fetchCreateCategory: (name: string, image: string, history: any) =>
-    dispatch(fetchCreateCategory(name, image, history)),
+  fetchCreateCategory: (
+    name: string,
+    name_pt: string,
+    image: string,
+    history: any
+  ) => dispatch(fetchCreateCategory(name, name_pt, image, history)),
 });
 
 export default connect(

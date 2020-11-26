@@ -130,6 +130,7 @@ export interface CreateCategory extends Action, FetchCreateCategory {
 export interface FetchCreateCategory {
   image: string;
   name: string;
+  name_pt: string;
   history: any;
 }
 

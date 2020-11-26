@@ -16,7 +16,7 @@ interface LoginProps {
 const LoginContainer: FC<LoginProps> = ({ fetchAuthUser, user }) => {
   let history = useHistory();
   useEffect(() => {
-    if (user) history.push("/cabinet");
+    if (user && user.type) history.push("/cabinet");
   }, []);
   return (
     <div className="Login">

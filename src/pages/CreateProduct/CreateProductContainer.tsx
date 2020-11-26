@@ -19,13 +19,19 @@ import { firestore } from "../../common/firebase";
 
 type CreateCategory = {
   title: string;
+  title_pt: string;
   price: number;
   discount: number;
   category: string;
+  storage_count: string;
+  storage_info: string;
   sub_categories: string;
   descriptions: string;
+  descriptions_pt: string;
   life_conditions: string;
+  life_conditions_pt: string;
   сomposition: string;
+  сomposition_pt: string;
 };
 
 interface CreateProductProps {
@@ -74,16 +80,22 @@ const CreateProductContainer: FC<CreateProductProps> = ({
       fetchCreateProduct(
         {
           title: data.title,
+          title_pt: data.title_pt,
           price: {
             current: data.price,
             discount: data.discount,
           },
+          storage_count: data.storage_count,
+          storage_info: data.storage_info,
           descriptions: data.descriptions,
+          descriptions_pt: data.descriptions_pt,
           category: firestore.doc(`category/${data.category}`),
           images: [last_photo],
           life_conditions: data.life_conditions,
+          life_conditions_pt: data.life_conditions_pt,
           sub_category: firestore.doc(`sub_category/${data.sub_categories}`),
           сomposition: data.сomposition,
+          сomposition_pt: data.сomposition_pt,
         },
         history
       );
@@ -120,6 +132,13 @@ const CreateProductContainer: FC<CreateProductProps> = ({
             register={register}
             required={{ required: true }}
           />
+          <FormInput
+            placeholder={"Portugal Title"}
+            name={"title_pt"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
           <div className="Product-Create-Form-Row">
             <FormInput
               customStyle={{ marginRight: "20px" }}
@@ -142,6 +161,20 @@ const CreateProductContainer: FC<CreateProductProps> = ({
           <p className="Product-Create-Form-Price">
             Finally price: {price * (1 - discount / 100)}
           </p>
+          <FormInput
+            placeholder={"Storage Count"}
+            name={"storage_count"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
+          <FormInput
+            placeholder={"Storage Info"}
+            name={"storage_info"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
           <FormSelect
             placeholder={"Category"}
             name={"category"}
@@ -169,6 +202,13 @@ const CreateProductContainer: FC<CreateProductProps> = ({
             required={{ required: true }}
           />
           <FormInput
+            placeholder={"Portugal Descriptions"}
+            name={"descriptions_pt"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
+          <FormInput
             placeholder={"Life Conditions"}
             name={"life_conditions"}
             errors={errors}
@@ -176,8 +216,22 @@ const CreateProductContainer: FC<CreateProductProps> = ({
             required={{ required: true }}
           />
           <FormInput
+            placeholder={"Portugal Life Conditions"}
+            name={"life_conditions_pt"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
+          <FormInput
             placeholder={"Composition"}
             name={"сomposition"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
+          <FormInput
+            placeholder={"Portugal Composition"}
+            name={"сomposition_pt"}
             errors={errors}
             register={register}
             required={{ required: true }}

@@ -106,6 +106,7 @@ function* fetchCreateCategory(data: FetchCreateCategory) {
     yield call(() =>
       firestore.collection("category").add({
         name: data.name,
+        name_pt: data.name_pt,
         image: data.image,
       })
     );

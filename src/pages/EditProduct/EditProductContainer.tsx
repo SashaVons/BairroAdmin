@@ -23,13 +23,19 @@ import { firestore } from "../../common/firebase";
 
 type UpdateProduct = {
   title: string;
+  title_pt: string;
   price: number;
   discount: number;
   category: string;
+  storage_count: string;
+  storage_info: string;
   sub_categories: string;
   descriptions: string;
+  descriptions_pt: string;
   life_conditions: string;
+  life_conditions_pt: string;
   сomposition: string;
+  сomposition_pt: string;
 };
 
 interface EditProductProps {
@@ -81,6 +87,7 @@ const EditProductContainer: FC<EditProductProps> = ({
   useEffect(() => {
     if (singleProduct) {
       setValue("title", singleProduct.title);
+      setValue("title_pt", singleProduct.title_pt);
       setValue("price", singleProduct.price.current);
       setPrice(singleProduct.price.current);
       setValue("discount", singleProduct.price.discount);
@@ -89,8 +96,13 @@ const EditProductContainer: FC<EditProductProps> = ({
       setCategory(singleProduct.category._id);
       setValue("sub_categories", singleProduct.sub_category._id);
       setValue("descriptions", singleProduct.descriptions);
+      setValue("descriptions_pt", singleProduct.descriptions_pt);
       setValue("life_conditions", singleProduct.life_conditions);
+      setValue("life_conditions_pt", singleProduct.life_conditions_pt);
       setValue("сomposition", singleProduct.сomposition);
+      setValue("сomposition_pt", singleProduct.сomposition_pt);
+      setValue("storage_info", singleProduct.storage_info);
+      setValue("storage_count", singleProduct.storage_count);
     }
   }, [singleProduct]);
 
@@ -104,18 +116,24 @@ const EditProductContainer: FC<EditProductProps> = ({
     fetchUpdateProduct(
       {
         title: data.title,
+        title_pt: data.title_pt,
         price: {
           current: data.price,
           discount: data.discount,
         },
         descriptions: data.descriptions,
+        descriptions_pt: data.descriptions_pt,
         images: [
           isPhotoLoad && last_photo ? last_photo : singleProduct.images[0],
         ],
+        storage_count: data.storage_count,
+        storage_info: data.storage_info,
         category: firestore.doc(`category/${data.category}`),
         sub_category: firestore.doc(`sub_category/${data.sub_categories}`),
         life_conditions: data.life_conditions,
+        life_conditions_pt: data.life_conditions_pt,
         сomposition: data.сomposition,
+        сomposition_pt: data.сomposition_pt,
       },
       productId,
       history
@@ -158,6 +176,13 @@ const EditProductContainer: FC<EditProductProps> = ({
             register={register}
             required={{ required: true }}
           />
+          <FormInput
+            placeholder={"Portugal Title"}
+            name={"title_pt"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
           <div className="Product-Edit-Form-Row">
             <FormInput
               customStyle={{ marginRight: "20px" }}
@@ -180,6 +205,20 @@ const EditProductContainer: FC<EditProductProps> = ({
           <p className="Product-Edit-Form-Price">
             Finally price: {price * (1 - discount / 100)}
           </p>
+          <FormInput
+            placeholder={"Storage Count"}
+            name={"storage_count"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
+          <FormInput
+            placeholder={"Storage Info"}
+            name={"storage_info"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
           <FormSelect
             placeholder={"Category"}
             name={"category"}
@@ -207,8 +246,22 @@ const EditProductContainer: FC<EditProductProps> = ({
             required={{ required: true }}
           />
           <FormInput
+            placeholder={"Portugal Descriptions"}
+            name={"descriptions_pt"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
+          <FormInput
             placeholder={"Life Conditions"}
             name={"life_conditions"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
+          <FormInput
+            placeholder={"Portugal Life Conditions"}
+            name={"life_conditions_pt"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -220,10 +273,17 @@ const EditProductContainer: FC<EditProductProps> = ({
             register={register}
             required={{ required: true }}
           />
+          <FormInput
+            placeholder={"Portugal Composition"}
+            name={"сomposition_pt"}
+            errors={errors}
+            register={register}
+            required={{ required: true }}
+          />
           <input
             type="submit"
             className="Product-Edit-Form-Button"
-            value="Create"
+            value="Update"
           />
         </form>
       ) : null}

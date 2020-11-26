@@ -58,7 +58,6 @@ const OrderItemContainer: FC<OrderItemProps> = ({
             {moment(singleOrder.date).format("DD/MM/YY HH:mm")}
           </p>
           <p className="Order-Item-Form-Title">Status</p>
-          <p className="Order-Item-Form-Text">{singleOrder.status}</p>
           <FormSelect
             placeholder={"Status"}
             name={"status"}
@@ -144,6 +143,7 @@ const OrderItemContainer: FC<OrderItemProps> = ({
               <tr>
                 <th>Image</th>
                 <th>Title</th>
+                <th>Storage Info</th>
                 <th>Count</th>
               </tr>
             </thead>
@@ -160,6 +160,9 @@ const OrderItemContainer: FC<OrderItemProps> = ({
                         </td>
                         <td className="Orders-Table-Title" align="left">
                           {item.title}
+                        </td>
+                        <td className="Orders-Table-Title" align="left">
+                          {item.storage_info}
                         </td>
                         <td className="Orders-Table-Title" align="left">
                           {item.count}

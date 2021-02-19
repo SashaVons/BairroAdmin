@@ -66,6 +66,7 @@ const EditPromocodeContainer: FC<EditPromocodeProps> = ({
         <FormInput
           placeholder={"Code"}
           name={"code"}
+          type={"text"}
           errors={errors}
           register={register}
           required={{ required: true }}
@@ -73,6 +74,7 @@ const EditPromocodeContainer: FC<EditPromocodeProps> = ({
         <FormInput
           placeholder={"Discount"}
           name={"discount"}
+          type={"text"}
           errors={errors}
           register={register}
           required={{ required: true }}

@@ -83,7 +83,12 @@ const ProductsListContainer: FC<ProductsListProps> = ({
                         {item.category.name}
                       </td>
                       <td className="Products-Table-Title" align="left">
-                        {item.sub_category.name}
+                        {item.sub_category.map(
+                          (subCategory: any, index: number) =>
+                            `${subCategory.name}${
+                              item.sub_category.length !== index + 1 ? ", " : ""
+                            }`
+                        )}
                       </td>
                       <td className="Products-Table-Title" align="left">
                         {item.storage_info}

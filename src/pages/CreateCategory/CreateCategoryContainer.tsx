@@ -71,6 +71,7 @@ const CreateCategoryContainer: FC<CreateCategoryProps> = ({
         <FormInput
           placeholder={"Name"}
           name={"name"}
+          type={"text"}
           errors={errors}
           register={register}
           required={{ required: true }}
@@ -78,6 +79,7 @@ const CreateCategoryContainer: FC<CreateCategoryProps> = ({
         <FormInput
           placeholder={"Protugal Name"}
           name={"name_pt"}
+          type={"text"}
           errors={errors}
           register={register}
           required={{ required: true }}

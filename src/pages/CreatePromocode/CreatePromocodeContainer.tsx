@@ -45,6 +45,7 @@ const CreatePromocodeContainer: FC<CreatePromocodeProps> = ({
         <FormInput
           placeholder={"Code"}
           name={"code"}
+          type={"text"}
           errors={errors}
           register={register}
           required={{ required: true }}
@@ -52,6 +53,7 @@ const CreatePromocodeContainer: FC<CreatePromocodeProps> = ({
         <FormInput
           placeholder={"Discount"}
           name={"discount"}
+          type={"text"}
           errors={errors}
           register={register}
           required={{ required: true }}

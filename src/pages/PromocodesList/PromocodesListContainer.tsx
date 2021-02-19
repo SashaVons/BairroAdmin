@@ -61,32 +61,36 @@ const PromocodesListContainer: FC<PromocodesListProps> = ({
           </thead>
           <tbody>
             {promocodes
-              ? promocodes.map((item: any, index: number) => (
-                  <>
-                    <tr>
-                      <td className="Promocode-Table-Title" align="left">
-                        {item.code}
-                      </td>
-                      <td className="Promocode-Table-Title" align="left">
-                        {`-${item.discount} €`}
-                      </td>
-                      <td align="right">
-                        {/* /edit/:categoryId */}
-                        <Link to={`${match.url}/edit/${item._id}`}>
-                          <Icon className="Promocode-Table-Edit">edit</Icon>
-                        </Link>
-                        <div
-                          onClick={() => {
-                            setCategoryIndex(index);
-                            setOpen(true);
-                          }}
-                        >
-                          <Icon className="Promocode-Table-Delete">delete</Icon>
-                        </div>
-                      </td>
-                    </tr>
-                  </>
-                ))
+              ? promocodes
+                  .filter((promo: any) => !promo.hasOwnProperty("owner"))
+                  .map((item: any, index: number) => (
+                    <>
+                      <tr>
+                        <td className="Promocode-Table-Title" align="left">
+                          {item.code}
+                        </td>
+                        <td className="Promocode-Table-Title" align="left">
+                          {`-${item.discount} €`}
+                        </td>
+                        <td align="right">
+                          {/* /edit/:categoryId */}
+                          <Link to={`${match.url}/edit/${item._id}`}>
+                            <Icon className="Promocode-Table-Edit">edit</Icon>
+                          </Link>
+                          <div
+                            onClick={() => {
+                              setCategoryIndex(index);
+                              setOpen(true);
+                            }}
+                          >
+                            <Icon className="Promocode-Table-Delete">
+                              delete
+                            </Icon>
+                          </div>
+                        </td>
+                      </tr>
+                    </>
+                  ))
               : null}
           </tbody>
         </table>

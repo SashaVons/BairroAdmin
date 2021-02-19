@@ -22,7 +22,7 @@ import {
 type CreateCategory = {
   name: string;
   name_pt: string;
-  category: string;
+  category: any;
 };
 
 interface CreateSubCategoryProps {
@@ -48,17 +48,28 @@ const EditSubCategoryContainer: FC<CreateSubCategoryProps> = ({
   const { subCategoryId } = match.params;
   let history = useHistory();
   const [isPhotoLoad, setPhotoLoad] = useState(false);
-  const { register, handleSubmit, errors, setValue } = useForm();
+  const { register, handleSubmit, errors, setValue, control } = useForm();
 
   const onSubmit = (data: CreateCategory) => {
-    fetchEditSubCategory(subCategoryId, data, history);
+    fetchEditSubCategory(
+      subCategoryId,
+      {
+        name: data.name,
+        name_pt: data.name_pt,
+        category: data.category.value,
+      },
+      history
+    );
   };
 
   useEffect(() => {
     if (singleSubCategory) {
       setValue("name", singleSubCategory.name);
       setValue("name_pt", singleSubCategory.name_pt);
-      setValue("category", singleSubCategory.category._id);
+      setValue("category", {
+        value: singleSubCategory.category._id,
+        label: singleSubCategory.category.name,
+      });
     }
   }, [singleSubCategory]);
 
@@ -81,6 +92,7 @@ const EditSubCategoryContainer: FC<CreateSubCategoryProps> = ({
           <FormInput
             placeholder={"Name"}
             name={"name"}
+            type={"text"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -88,6 +100,7 @@ const EditSubCategoryContainer: FC<CreateSubCategoryProps> = ({
           <FormInput
             placeholder={"Portugal Name"}
             name={"name_pt"}
+            type={"text"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -95,9 +108,11 @@ const EditSubCategoryContainer: FC<CreateSubCategoryProps> = ({
           <FormSelect
             placeholder={"Category"}
             name={"category"}
-            options={categories}
+            options={categories.map((el: any) => {
+              return { value: el._id, label: el.name };
+            })}
             errors={errors}
-            register={register}
+            control={control}
             required={{ required: true }}
           />
           <input

@@ -17,7 +17,7 @@ import { fetchCreateSubCategory } from "../../redux/sub_categories/actions";
 type CreateCategory = {
   name: string;
   name_pt: string;
-  category: string;
+  category: any;
 };
 
 interface CreateSubCategoryProps {
@@ -38,10 +38,15 @@ const CreateSubCategoryContainer: FC<CreateSubCategoryProps> = ({
 }) => {
   let history = useHistory();
   const [isPhotoLoad, setPhotoLoad] = useState(false);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, control } = useForm();
 
   const onSubmit = (data: CreateCategory) => {
-    fetchCreateSubCategory(data.name, data.name_pt, data.category, history);
+    fetchCreateSubCategory(
+      data.name,
+      data.name_pt,
+      data.category.value,
+      history
+    );
   };
 
   useEffect(() => {
@@ -62,6 +67,7 @@ const CreateSubCategoryContainer: FC<CreateSubCategoryProps> = ({
           <FormInput
             placeholder={"Name"}
             name={"name"}
+            type={"text"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -69,6 +75,7 @@ const CreateSubCategoryContainer: FC<CreateSubCategoryProps> = ({
           <FormInput
             placeholder={"Portugal Name"}
             name={"name_pt"}
+            type={"text"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -76,9 +83,11 @@ const CreateSubCategoryContainer: FC<CreateSubCategoryProps> = ({
           <FormSelect
             placeholder={"Category"}
             name={"category"}
-            options={categories}
+            options={categories.map((el: any) => {
+              return { value: el._id, label: el.name };
+            })}
             errors={errors}
-            register={register}
+            control={control}
             required={{ required: true }}
           />
           <input

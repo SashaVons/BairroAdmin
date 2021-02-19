@@ -21,11 +21,10 @@ type CreateCategory = {
   title: string;
   title_pt: string;
   price: number;
-  discount: number;
-  category: string;
+  old_price: number;
   storage_count: string;
   storage_info: string;
-  sub_categories: string;
+  sub_categories: Array<any>;
   descriptions: string;
   descriptions_pt: string;
   life_conditions: string;
@@ -61,8 +60,8 @@ const CreateProductContainer: FC<CreateProductProps> = ({
   const [isPhotoLoad, setPhotoLoad] = useState(false);
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
-  const [discount, setDiscount] = useState(0);
-  const { register, handleSubmit, errors, getValues } = useForm();
+  const [oldPrice, setOldPrice] = useState(0);
+  const { register, handleSubmit, errors, getValues, control } = useForm();
 
   useEffect(() => {
     fetchAllSubCategories();
@@ -82,20 +81,20 @@ const CreateProductContainer: FC<CreateProductProps> = ({
           title: data.title,
           title_pt: data.title_pt,
           price: {
-            current: data.price,
-            discount: data.discount,
+            current: Number(data.price),
+            old: data.old_price ? Number(data.old_price) : 0,
+            discount: data.old_price
+              ? Number(Math.floor(100 - price / (oldPrice / 100)))
+              : 0,
           },
           storage_count: data.storage_count,
           storage_info: data.storage_info,
           descriptions: data.descriptions,
           descriptions_pt: data.descriptions_pt,
-          category: firestore.doc(`category/${data.category}`),
           images: [last_photo],
-          life_conditions: data.life_conditions,
-          life_conditions_pt: data.life_conditions_pt,
-          sub_category: firestore.doc(`sub_category/${data.sub_categories}`),
-          сomposition: data.сomposition,
-          сomposition_pt: data.сomposition_pt,
+          sub_category: data.sub_categories.map((el: any) =>
+            firestore.doc(`sub_category/${el.value}`)
+          ),
         },
         history
       );
@@ -128,6 +127,7 @@ const CreateProductContainer: FC<CreateProductProps> = ({
           <FormInput
             placeholder={"Title"}
             name={"title"}
+            type={"text"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -135,6 +135,7 @@ const CreateProductContainer: FC<CreateProductProps> = ({
           <FormInput
             placeholder={"Portugal Title"}
             name={"title_pt"}
+            type={"text"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -142,28 +143,31 @@ const CreateProductContainer: FC<CreateProductProps> = ({
           <div className="Product-Create-Form-Row">
             <FormInput
               customStyle={{ marginRight: "20px" }}
-              placeholder={"Price"}
+              placeholder={"Current Price"}
               name={"price"}
+              type={"number"}
               errors={errors}
               register={register}
               onChange={(value: any) => setPrice(value)}
               required={{ required: true }}
             />
             <FormInput
-              placeholder={"Discount"}
-              name={"discount"}
+              placeholder={"Old Price"}
+              name={"old_price"}
+              type={"number"}
               errors={errors}
               register={register}
-              onChange={(value: any) => setDiscount(value)}
-              required={{ required: true }}
+              onChange={(value: any) => setOldPrice(value)}
+              required={{}}
             />
           </div>
           <p className="Product-Create-Form-Price">
-            Finally price: {price * (1 - discount / 100)}
+            {Number(Math.floor(100 - price / (oldPrice / 100)))}
           </p>
           <FormInput
             placeholder={"Storage Count"}
             name={"storage_count"}
+            type={"number"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -171,32 +175,26 @@ const CreateProductContainer: FC<CreateProductProps> = ({
           <FormInput
             placeholder={"Storage Info"}
             name={"storage_info"}
+            type={"text"}
             errors={errors}
             register={register}
-            required={{ required: true }}
-          />
-          <FormSelect
-            placeholder={"Category"}
-            name={"category"}
-            options={categories}
-            errors={errors}
-            register={register}
-            onChange={(value: string) => setCategory(value)}
             required={{ required: true }}
           />
           <FormSelect
             placeholder={"Sub Categories(Firstly select category)"}
             name={"sub_categories"}
-            options={sub_categories.filter(
-              (item: any) => item.category._id === category
-            )}
+            options={sub_categories.map((el: any) => {
+              return { value: el._id, label: el.name };
+            })}
             errors={errors}
-            register={register}
+            control={control}
             required={{ required: true }}
+            multi={true}
           />
           <FormInput
             placeholder={"Descriptions"}
             name={"descriptions"}
+            type={"text"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -204,34 +202,7 @@ const CreateProductContainer: FC<CreateProductProps> = ({
           <FormInput
             placeholder={"Portugal Descriptions"}
             name={"descriptions_pt"}
-            errors={errors}
-            register={register}
-            required={{ required: true }}
-          />
-          <FormInput
-            placeholder={"Life Conditions"}
-            name={"life_conditions"}
-            errors={errors}
-            register={register}
-            required={{ required: true }}
-          />
-          <FormInput
-            placeholder={"Portugal Life Conditions"}
-            name={"life_conditions_pt"}
-            errors={errors}
-            register={register}
-            required={{ required: true }}
-          />
-          <FormInput
-            placeholder={"Composition"}
-            name={"сomposition"}
-            errors={errors}
-            register={register}
-            required={{ required: true }}
-          />
-          <FormInput
-            placeholder={"Portugal Composition"}
-            name={"сomposition_pt"}
+            type={"text"}
             errors={errors}
             register={register}
             required={{ required: true }}

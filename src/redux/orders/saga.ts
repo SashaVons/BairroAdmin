@@ -1,5 +1,5 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import { firestore } from "../../common/firebase";
+import { database, firestore } from "../../common/firebase";
 import {
   requestAllOrders,
   requestAllOrdersError,

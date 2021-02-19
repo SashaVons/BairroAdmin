@@ -28,7 +28,7 @@ const OrderItemContainer: FC<OrderItemProps> = ({
   singleOrder,
 }) => {
   const match = useRouteMatch<any>();
-  const { register, handleSubmit, errors, setValue } = useForm();
+  const { register, handleSubmit, errors, setValue, control } = useForm();
   const { orderId } = match.params;
 
   useEffect(() => {
@@ -36,7 +36,11 @@ const OrderItemContainer: FC<OrderItemProps> = ({
   }, []);
 
   useEffect(() => {
-    if (singleOrder) setValue("status", singleOrder.status);
+    if (singleOrder)
+      setValue("status", {
+        value: singleOrder.status,
+        label: singleOrder.status,
+      });
   }, [singleOrder]);
 
   const onSubmit = (data: EditOrder) => {
@@ -66,10 +70,12 @@ const OrderItemContainer: FC<OrderItemProps> = ({
               { _id: "ACCEPTED", name: "ACCEPTED" },
               { _id: "SENT", name: "SENT" },
               { _id: "CLOSE", name: "CLOSE" },
-            ]}
+            ].map((el: any) => {
+              return { value: el._id, label: el.name };
+            })}
             errors={errors}
-            register={register}
-            onChange={(value: string) =>
+            control={control}
+            onChangeAction={(value: string) =>
               fetchUpdateOrderStatus(singleOrder._id, value)
             }
             required={{ required: true }}
@@ -80,6 +86,24 @@ const OrderItemContainer: FC<OrderItemProps> = ({
           <p className="Order-Item-Form-Text">{`${singleOrder.price.toFixed(
             2
           )} €`}</p>
+          {singleOrder.nif ? (
+            <>
+              <p className="Order-Item-Form-Title">NIF</p>
+              <p className="Order-Item-Form-Text">{`${singleOrder.nif}`}</p>
+            </>
+          ) : null}
+          {singleOrder.userName ? (
+            <>
+              <p className="Order-Item-Form-Title">User Name</p>
+              <p className="Order-Item-Form-Text">{`${singleOrder.userName}`}</p>
+            </>
+          ) : null}
+          {singleOrder.phoneNumber ? (
+            <>
+              <p className="Order-Item-Form-Title">Phone Number</p>
+              <p className="Order-Item-Form-Text">{`${singleOrder.phoneNumber}`}</p>
+            </>
+          ) : null}
           <p className="Order-Item-Form-Main">Address</p>
           <div className="Order-Item-Form-Row">
             <div className="Order-Item-Form-Row-Container">
@@ -107,14 +131,6 @@ const OrderItemContainer: FC<OrderItemProps> = ({
               </p>
             </div>
             <div className="Order-Item-Form-Row-Container">
-              <p className="Order-Item-Form-Title">Flat</p>
-              <p className="Order-Item-Form-Text">
-                {singleOrder.address.flat
-                  ? singleOrder.address.flat
-                  : "Not added"}
-              </p>
-            </div>
-            <div className="Order-Item-Form-Row-Container">
               <p className="Order-Item-Form-Title">Entrance</p>
               <p className="Order-Item-Form-Text">
                 {singleOrder.address.entrance
@@ -131,12 +147,6 @@ const OrderItemContainer: FC<OrderItemProps> = ({
               </p>
             </div>
           </div>
-          <p className="Order-Item-Form-Title">Promocode</p>
-          <p className="Order-Item-Form-Text">
-            {singleOrder.promocode
-              ? `-${singleOrder.promocode} €`
-              : "Not added"}
-          </p>
           <p className="Order-Item-Form-Main">Products</p>
           <table className="Orders-Table">
             <thead>

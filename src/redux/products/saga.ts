@@ -61,25 +61,19 @@ function* fetchAllProducts() {
 
     yield all(
       resData.map(function* (item: any, index: number) {
-        yield call(() =>
-          item.category.get().then((res: any) => {
-            resData[index].category = {
-              _id: res.id,
-              ...res.data(),
-            };
-          })
-        );
-      })
-    );
-
-    yield all(
-      resData.map(function* (item: any, index: number) {
-        yield call(() =>
-          item.sub_category.get().then((res: any) => {
-            resData[index].sub_category = {
-              _id: res.id,
-              ...res.data(),
-            };
+        yield all(
+          item.sub_category.map(function* (
+            subCategory: any,
+            categoryIndex: number
+          ) {
+            yield call(() =>
+              subCategory.get().then((res: any) => {
+                resData[index].sub_category[categoryIndex] = {
+                  _id: res.id,
+                  ...res.data(),
+                };
+              })
+            );
           })
         );
       })
@@ -169,24 +163,21 @@ function* fetchSingleProduct(data: FetchSingleProduct) {
         })
     );
 
-    yield call(() =>
-      resData.category.get().then((res: any) => {
-        resData.category = { _id: res.id, ...res.data() };
+    yield all(
+      resData.sub_category.map(function* (
+        subCategory: any,
+        categoryIndex: number
+      ) {
+        yield call(() =>
+          subCategory.get().then((res: any) => {
+            resData.sub_category[categoryIndex] = {
+              _id: res.id,
+              ...res.data(),
+            };
+          })
+        );
       })
     );
-
-    yield call(() =>
-      resData.sub_category.get().then((res: any) => {
-        resData.sub_category = { _id: res.id, ...res.data() };
-      })
-    );
-
-    if (resData.sub_category.category)
-      yield call(() =>
-        resData.sub_category.category.get().then((res: any) => {
-          resData.sub_category.category = { _id: res.id, ...res.data() };
-        })
-      );
 
     yield put(requestSingleProductSuccess(resData));
   } catch (error) {

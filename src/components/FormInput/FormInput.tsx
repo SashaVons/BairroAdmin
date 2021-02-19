@@ -6,6 +6,7 @@ interface FormInputProps {
   placeholder: string;
   errors: DeepMap<Record<string, any>, FieldError>;
   name: string;
+  type: string;
   register: any;
   required: any;
   customStyle?: any;
@@ -16,6 +17,7 @@ export const FormInput: FC<FormInputProps> = ({
   placeholder,
   errors,
   name,
+  type,
   register,
   required,
   customStyle,
@@ -27,6 +29,8 @@ export const FormInput: FC<FormInputProps> = ({
         className={`Container-Input ${
           errors[name] ? "Container-Input-Error" : ""
         }`}
+        type={type}
+        step="0.01"
         name={name}
         onChange={(e) => (onChange ? onChange(e.target.value) : null)}
         placeholder={placeholder}

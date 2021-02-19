@@ -100,6 +100,7 @@ const EditCategoryContainer: FC<EditCategoryProps> = ({
         <FormInput
           placeholder={"Name"}
           name={"name"}
+          type={"text"}
           errors={errors}
           register={register}
           required={{ required: true }}
@@ -107,6 +108,7 @@ const EditCategoryContainer: FC<EditCategoryProps> = ({
         <FormInput
           placeholder={"Portugal Name"}
           name={"name_pt"}
+          type={"text"}
           errors={errors}
           register={register}
           required={{ required: true }}

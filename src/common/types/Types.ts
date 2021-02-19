@@ -3,19 +3,20 @@ export interface Product {
   title_pt: string;
   price: {
     current: number;
+    old: number;
     discount: number;
   };
   storage_count: string;
   storage_info: string;
   descriptions: string;
   descriptions_pt: string;
-  category: any;
+  // category: any;
   images: Array<string>;
-  life_conditions: string;
-  life_conditions_pt: string;
+  // life_conditions: string;
+  // life_conditions_pt: string;
   sub_category: any;
-  сomposition: string;
-  сomposition_pt: string;
+  // сomposition: string;
+  // сomposition_pt: string;
 }
 
 export interface Promocode {

@@ -32,6 +32,7 @@ export const Login: FC<LoginProps> = ({ fetchAuthUser }) => {
           <FormInput
             placeholder={"Email"}
             name={"email"}
+            type={"text"}
             errors={errors}
             register={register}
             required={{ required: true }}
@@ -39,6 +40,7 @@ export const Login: FC<LoginProps> = ({ fetchAuthUser }) => {
           <FormInput
             placeholder={"Password"}
             name={"password"}
+            type={"text"}
             errors={errors}
             register={register}
             required={{ required: true }}

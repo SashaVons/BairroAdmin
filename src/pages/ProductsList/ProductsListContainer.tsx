@@ -30,6 +30,8 @@ const ProductsListContainer: FC<ProductsListProps> = ({
     fetchAllProducts();
   }, []);
 
+  console.log(products);
+
   return (
     <>
       <AcceptDialog
@@ -54,7 +56,6 @@ const ProductsListContainer: FC<ProductsListProps> = ({
               <th>Image</th>
               <th>Title</th>
               <th>Storage Count</th>
-              <th>Category</th>
               <th>Sub Category</th>
               <th>Storage Info</th>
               <th>Price</th>
@@ -78,9 +79,6 @@ const ProductsListContainer: FC<ProductsListProps> = ({
                       </td>
                       <td className="Products-Table-Title" align="left">
                         {item.storage_count}
-                      </td>
-                      <td className="Products-Table-Title" align="left">
-                        {item.category.name}
                       </td>
                       <td className="Products-Table-Title" align="left">
                         {item.sub_category.map(

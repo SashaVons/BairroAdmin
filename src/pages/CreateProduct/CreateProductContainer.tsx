@@ -84,7 +84,9 @@ const CreateProductContainer: FC<CreateProductProps> = ({
             current: Number(data.price),
             old: data.old_price ? Number(data.old_price) : 0,
             discount: data.old_price
-              ? Number(Math.floor(100 - price / (oldPrice / 100)))
+              ? Number(Math.floor(100 - price / (oldPrice / 100))) < 0
+                ? 0
+                : Number(Math.floor(100 - price / (oldPrice / 100)))
               : 0,
           },
           storage_count: data.storage_count,
@@ -162,7 +164,12 @@ const CreateProductContainer: FC<CreateProductProps> = ({
             />
           </div>
           <p className="Product-Create-Form-Price">
-            {Number(Math.floor(100 - price / (oldPrice / 100)))}
+            Finally discount:
+            {oldPrice
+              ? Number(Math.floor(100 - price / (oldPrice / 100))) < 0
+                ? 0
+                : Number(Math.floor(100 - price / (oldPrice / 100)))
+              : 0}
           </p>
           <FormInput
             placeholder={"Storage Count"}

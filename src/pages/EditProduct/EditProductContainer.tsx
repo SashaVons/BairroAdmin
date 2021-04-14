@@ -99,8 +99,6 @@ const EditProductContainer: FC<EditProductProps> = ({
       setPrice(singleProduct.price.current);
       setValue("discount", singleProduct.price.discount);
       setOldPrice(singleProduct.price.old);
-      setValue("category", singleProduct.category._id);
-      setCategory(singleProduct.category._id);
       setValue(
         "sub_categories",
         singleProduct.sub_category.map((el: any) => {
@@ -133,7 +131,9 @@ const EditProductContainer: FC<EditProductProps> = ({
           current: Number(data.price),
           old: data.old_price ? Number(data.old_price) : 0,
           discount: data.old_price
-            ? Number(Math.floor(100 - price / (oldPrice / 100)))
+            ? Number(Math.floor(100 - price / (oldPrice / 100))) < 0
+              ? 0
+              : Number(Math.floor(100 - price / (oldPrice / 100)))
             : 0,
         },
         descriptions: data.descriptions,
@@ -224,7 +224,11 @@ const EditProductContainer: FC<EditProductProps> = ({
           </div>
           <p className="Product-Edit-Form-Price">
             Finally discount:
-            {oldPrice ? Number(Math.floor(100 - price / (oldPrice / 100))) : 0}
+            {oldPrice
+              ? Number(Math.floor(100 - price / (oldPrice / 100))) < 0
+                ? 0
+                : Number(Math.floor(100 - price / (oldPrice / 100)))
+              : 0}
           </p>
           <FormInput
             placeholder={"Storage Count"}

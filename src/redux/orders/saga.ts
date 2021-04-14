@@ -93,7 +93,25 @@ function* fetchSingleOrder(data: FetchSingleOrder) {
       })
     );
 
-    yield put(requestSingleOrderSuccess(resData));
+    let promoObj;
+    if (resData.promocode)
+      promoObj = yield call(() =>
+        firestore
+          .collection("promocode")
+          .doc(resData.promocode)
+          .get()
+          .then((res: any) => ({
+            _id: res.id,
+            ...res.data(),
+          }))
+      );
+
+    yield put(
+      requestSingleOrderSuccess({
+        ...resData,
+        promocode: promoObj ? promoObj : resData.promocode,
+      })
+    );
   } catch (error) {
     console.log(error);
     yield put(requestSingleOrderError());

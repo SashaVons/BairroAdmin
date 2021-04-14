@@ -83,9 +83,21 @@ const OrderItemContainer: FC<OrderItemProps> = ({
           <p className="Order-Item-Form-Title">Payment Type</p>
           <p className="Order-Item-Form-Text">{singleOrder.paymentType}</p>
           <p className="Order-Item-Form-Title">Price</p>
-          <p className="Order-Item-Form-Text">{`${singleOrder.price.toFixed(
-            2
-          )} €`}</p>
+          <p className="Order-Item-Form-Text">
+            {singleOrder.promocode
+              ? `${(
+                  singleOrder.price.toFixed(2) - singleOrder.promocode.discount
+                ).toFixed(2)} €`
+              : `${singleOrder.price.toFixed(2)} €`}
+          </p>
+          {singleOrder.promocode ? (
+            <>
+              <p className="Order-Item-Form-Title">Promo Code</p>
+              <p className="Order-Item-Form-Text">
+                {singleOrder.promocode.code}
+              </p>
+            </>
+          ) : null}
           {singleOrder.nif ? (
             <>
               <p className="Order-Item-Form-Title">NIF</p>

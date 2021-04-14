@@ -54,6 +54,7 @@ const OrdersListContainer: FC<OrdersListProps> = ({
               <th>Status</th>
               <th>Products Count</th>
               <th>Price</th>
+              <th>Promocode</th>
               <th>Payment Type</th>
             </tr>
           </thead>
@@ -83,6 +84,9 @@ const OrdersListContainer: FC<OrdersListProps> = ({
                         </td>
                         <td className="Orders-Table-Title" align="left">
                           {item.price.toFixed(2)}
+                        </td>
+                        <td className="Orders-Table-Title" align="left">
+                          {item.promocode ? "Used" : "None"}
                         </td>
                         <td className="Orders-Table-Title" align="left">
                           {item.paymentType}
